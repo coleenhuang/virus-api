@@ -24,3 +24,10 @@ Run the tests `npm test`
 ## Deploying
 
 When your new project is ready for deployment, add a new Heroku application with `heroku create`. This will make a new git remote called "heroku" and you can then `npm run deploy` which will push to this remote's master branch.
+
+#Documentation for Virus api
+The information in this API are from my personal notes on viruses, and though I have a degree in microbiology, I'm by no means an expert in virology. So please keep in mind that some of the information may be inaccurate or out of date.
+
+##Endpoints
+
+###GET /class

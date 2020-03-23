@@ -1,14 +1,13 @@
-DROP TYPE IF EXISTS baltimore;
 CREATE TYPE baltimore AS ENUM (
-    'I',
-    'II',
-    'III',
-    'IV',
-    'V',
-    'VI',
-    'VII'
+  'I',
+  'II',
+  'III',
+  'IV',
+  'V',
+  'VI',
+  'VII'
 );
 
 ALTER TABLE classification
-  ADD COLUMN
-  virus_type baltimore NOT NULL;
+  ADD COLUMN subfamily TEXT,
+  ADD COLUMN virus_type baltimore NOT NULL;
