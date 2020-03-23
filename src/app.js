@@ -26,8 +26,6 @@ app.use(cors())
 
  app.get('/family', (req, res, next) => {
    const knexInstance = req.app.get('db')
-
-   //not a function?
    ArticlesService.getAllFamilies(knexInstance)
       .then(articles => {
         res.json(articles)

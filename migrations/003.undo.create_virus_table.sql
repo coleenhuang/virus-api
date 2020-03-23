@@ -1,0 +1,4 @@
+ALTER TABLE virus
+  DROP COLUMN family;
+
+DROP TABLE IF EXISTS virus;

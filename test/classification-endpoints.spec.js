@@ -1,6 +1,7 @@
 const { expect } = require('chai')
 const knex = require('knex')
 const app = require('../src/app')
+const { makeFamiliesArray } = require('./families.fixtures.js')
 
 describe.only('Classification Endpoints', function() {
   let db;
@@ -16,41 +17,32 @@ describe.only('Classification Endpoints', function() {
   after('disconnect from db', () => db.destroy())
 
   before('clean the table', () => db('classification').truncate())
+  afterEach('cleanup', () => db('classification').truncate())
 
-  context('given that there are entries in the database', () =>{
-    const testFamilies = [
-      {
-        family_id: 1,
-        family_name: 'Coronaviruses',
-        virus_type: 'IV'
-      },
-      {
-        family_id: 2,
-        family_name: 'Bunyaviruses',
-        virus_type: 'V'
-      },
-      {
-        family_id: 3,
-        family_name: 'Reoviruses',
-        virus_type: 'III'
-      },
-      {
-        family_id: 4,
-        family_name: 'Poxviruses',
-        virus_type: 'I'
-      }
-    ];
-    beforeEach('insert entries', () => {
-      return db
-        .into('classification')
-        .insert(testFamilies)
+  describe('GET /family', () => {
+    context(`Given no families`, () => {
+     it(`responds with 200 and an empty list`, () => {
+       return supertest(app)
+         .get('/family')
+         .expect(200, [])
+     })
+   })
+
+    context('given that there are entries in the database', () =>{
+      const testFamilies = makeFamiliesArray()
+      beforeEach('insert entries', () => {
+        return db
+          .into('classification')
+          .insert(testFamilies)
+      })
+
+      it('responds with 200 and all of the entries', ()=>{
+        return supertest(app)
+          .get('/family')
+          .expect(200, testFamilies)
+      })
     })
   })
 
-  it('GET /family responds with 200 and all of the entries', ()=>{
-    return supertest(app)
-      .get('/family')
-      .expect(200)
-      // TODO: add more assertions about the body
-  })
+
 })
