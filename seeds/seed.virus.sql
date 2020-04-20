@@ -1,5 +1,7 @@
-INSERT INTO virus
-  (virus_name, abbr, shape, membrane)
+TRUNCATE TABLE viruses;
+INSERT INTO viruses
+  (virus_name, family)
   VALUES
-    ('Varicella zoster virus', 'VZV', 'T-16 icosahedral', true),
-    ('Ebolavirus', 'EBOV')
+    ('Influenza A virus', 19),
+    ('Norovirus', 16),
+    ('Poliovirus', 15);

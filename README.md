@@ -30,4 +30,22 @@ The information in this API are from my personal notes on viruses, and though I 
 
 ##Endpoints
 
-###GET /class
+###GET /family
+####Parameter
+type(required) - Needs to be a Roman numeral from I to VII
+
+The viruses and their families in the database are sorted according to the Baltimore classification system. This endpoint returns a list of the families in the selected group.
+
+###GET /virus
+####Parameter
+family(optional) - eg. Flaviviridae. Subfamilies of viruses also work here.
+
+Returns a list of viruses.
+
+###GET /host
+####Parameter
+host-type
+or
+host-name
+
+Returns a list of viruses by host.

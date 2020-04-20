@@ -4,7 +4,7 @@ const morgan = require('morgan')
 const cors = require('cors')
 const helmet = require('helmet')
 const { NODE_ENV } = require('./config')
-const ArticlesService = require('./articles-service')
+const FamiliesService = require('./families-service')
 
 const app = express()
 
@@ -20,13 +20,26 @@ app.use(cors())
    res.send('Hello, world!')
  })
 
- app.get('/articles', (req, res, next) => {
-   res.send('All articles')
- })
 
  app.get('/family', (req, res, next) => {
+   const { type } = req.query;
+   const validTypes = [
+     'I','II','III','IV','V','VI','VII'
+   ]
+  // do some validation
+  if (!type) {
+    // type is required
+    return res
+      .status(400)
+      .send('Please provide a type that is a roman numeral from I to VII');
+  }
+  else if (!validTypes.includes(type.toUpperCase())){
+    return res
+      .status(400)
+      .send('Please provide a type that is a roman numeral from I to VII');
+  }
    const knexInstance = req.app.get('db')
-   ArticlesService.getAllFamilies(knexInstance)
+   FamiliesService.getAllFamilies(knexInstance, type)
       .then(articles => {
         res.json(articles)
       })
