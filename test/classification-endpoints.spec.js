@@ -1,7 +1,7 @@
 const { expect } = require('chai')
 const knex = require('knex')
 const app = require('../src/app')
-const { makeFamiliesArray } = require('./families.fixtures.js')
+const { makeFamiliesArray } = require('./families.baltimore.js')
 
 describe.only('Classification Endpoints', function() {
   let db;
@@ -23,7 +23,7 @@ describe.only('Classification Endpoints', function() {
     context(`Given no families`, () => {
      it(`responds with 200 and an empty list`, () => {
        return supertest(app)
-         .get('/family?type=I')
+         .get('/baltimore?type=I')
          .expect(200, [])
      })
    })
@@ -37,12 +37,12 @@ describe.only('Classification Endpoints', function() {
       it('responds with 200 and correct entries(match exists)', ()=>{
         let expectedFamilies = testFamilies.filter(family=> family.virus_type === 'I');
         return supertest(app)
-          .get('/family?type=I')
+          .get('/baltimore?type=I')
           .expect(200, expectedFamilies)
       })
       it(`responds with 200 and an empty list(match doesn't exist)`, () => {
         return supertest(app)
-          .get('/family?type=VI')
+          .get('/baltimore?type=VI')
           .expect(200, [])
       })
     })
@@ -52,7 +52,7 @@ describe.only('Classification Endpoints', function() {
     context(`Given no families`, () => {
      it(`responds with 400`, () => {
        return supertest(app)
-         .get('/family')
+         .get('/baltimore')
          .expect(400)
      })
     })
@@ -65,7 +65,7 @@ describe.only('Classification Endpoints', function() {
       })
       it(`responds with 400`, () => {
         return supertest(app)
-          .get('/family')
+          .get('/baltimore')
           .expect(400)
       })
     })
@@ -74,7 +74,7 @@ describe.only('Classification Endpoints', function() {
     context(`Given no families`, () => {
      it(`responds with 400`, () => {
        return supertest(app)
-         .get('/family?type=X')
+         .get('/baltimore?type=X')
          .expect(400)
      })
     })
@@ -87,7 +87,7 @@ describe.only('Classification Endpoints', function() {
       })
       it(`responds with 400`, () => {
         return supertest(app)
-          .get('/family?type=X')
+          .get('/baltimore?type=X')
           .expect(400)
       })
     })

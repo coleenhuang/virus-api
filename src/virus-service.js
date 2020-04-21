@@ -1,10 +1,11 @@
-const virusService = {
-  getAllViruses(knex) {
-    return knex.select('*').from('viruses')
-  }
+const VirusService = {
   getVirusFam(knex, family) {
-    //Gets viruses by family_id
-    //Involves a foreign key
-    return knex.select('*').from('viruses')
+    //gets viruses by family
+    return knex.select('viruses.virus_name', 'classification.family_name', 'classification.virus_type')
+    .from('viruses')
+    .innerJoin('classification','viruses.family', '=', 'classification.family_id')
+    .where('classification.family_name', family)
   }
-}
+};
+
+module.exports = VirusService;

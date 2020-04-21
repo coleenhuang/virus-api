@@ -1,4 +1,4 @@
-TRUNCATE TABLE classification;
+TRUNCATE TABLE classification RESTART IDENTITY CASCADE;
 
 INSERT INTO classification
   (family_name, subfamily, virus_type)

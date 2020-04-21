@@ -5,6 +5,7 @@ const cors = require('cors')
 const helmet = require('helmet')
 const { NODE_ENV } = require('./config')
 const FamiliesService = require('./families-service')
+const VirusService = require('./virus-service')
 
 const app = express()
 
@@ -21,7 +22,7 @@ app.use(cors())
  })
 
 
- app.get('/family', (req, res, next) => {
+ app.get('/baltimore', (req, res, next) => {
    const { type } = req.query;
    const validTypes = [
      'I','II','III','IV','V','VI','VII'
@@ -45,6 +46,23 @@ app.use(cors())
       })
       .catch(next)
  })
+ app.get('/families', (req, res, next) => {
+   const { family } = req.query;
+   // do some validation
+   if (!family) {
+     // type is required
+     return res
+       .status(400)
+       .send('Please enter a family');
+   }
+   const knexInstance = req.app.get('db')
+   VirusService.getVirusFam(knexInstance, family)
+     .then(articles => {
+       res.json(articles)
+     })
+     .catch(next)
+ })
+
 
  app.use(function errorHandler(error, req, res, next) {
     let response
