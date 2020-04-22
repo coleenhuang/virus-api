@@ -48,14 +48,17 @@ app.use(cors())
  })
  app.get('/families', (req, res, next) => {
    const { family } = req.query;
+   const knexInstance = req.app.get('db')
    // do some validation
    if (!family) {
      // type is required
-     return res
-       .status(400)
-       .send('Please enter a family');
+     VirusService.getAllViruses(knexInstance)
+      .then(viruses => {
+        res.json(viruses)
+      })
+      .catch(next)
    }
-   const knexInstance = req.app.get('db')
+
    VirusService.getVirusFam(knexInstance, family)
      .then(articles => {
        res.json(articles)

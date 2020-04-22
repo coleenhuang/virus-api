@@ -1,9 +1,9 @@
 const { expect } = require('chai')
 const knex = require('knex')
 const app = require('../src/app')
-const { makeFamiliesArray } = require('./families.baltimore.js')
+const { makeFamiliesArray } = require('./baltimore.fixtures.js')
 
-describe.only('Classification Endpoints', function() {
+describe('Baltimore Endpoints', function() {
   let db;
   const validTypes = ['I','II','III','IV','V','VI','VII'];
   before('make knex instance', ()=>{

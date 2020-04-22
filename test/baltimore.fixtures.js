@@ -24,7 +24,18 @@ function makeFamiliesArray(){
       subfamily: 'Alphaherpesvirinae',
       virus_type: 'I'
     },
-
+    {
+      family_id: 5,
+      family_name: 'Coronaviridae',
+      subfamily: 'Coronavirinae',
+      virus_type: 'IV'
+    },
+    {
+      family_id: 6,
+      family_name: 'Filoviridae',
+      subfamily: null,
+      virus_type: 'V'
+    }
   ];
 }
 
