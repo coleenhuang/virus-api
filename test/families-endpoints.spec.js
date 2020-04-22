@@ -15,8 +15,8 @@ describe('Families Endpoints', function() {
 
   after('disconnect from db', () => db.destroy())
 
-  before('clean the table', () => db('classification').truncate())
-  afterEach('cleanup', () => db('classification').truncate())
+  before('clean the table', () => db.raw('TRUNCATE TABLE viruses CASCADE'))
+  afterEach('cleanup', () => db.raw('TRUNCATE TABLE viruses CASCADE'))
 
   describe('GET /families without family', ()=>{
     context('Given no viruses', () => {

@@ -51,7 +51,6 @@ app.use(cors())
    const knexInstance = req.app.get('db')
    // do some validation
    if (!family) {
-     // type is required
      VirusService.getAllViruses(knexInstance)
       .then(viruses => {
         res.json(viruses)
@@ -59,11 +58,11 @@ app.use(cors())
       .catch(next)
    }
 
-   VirusService.getVirusFam(knexInstance, family)
+   /*VirusService.getVirusFam(knexInstance, family)
      .then(articles => {
        res.json(articles)
      })
-     .catch(next)
+     .catch(next)*/
  })
 
 

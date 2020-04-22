@@ -16,8 +16,8 @@ describe('Baltimore Endpoints', function() {
 
   after('disconnect from db', () => db.destroy())
 
-  before('clean the table', () => db('classification').truncate())
-  afterEach('cleanup', () => db('classification').truncate())
+  before('clean the table', () => db.raw('TRUNCATE TABLE classification CASCADE'))
+  afterEach('cleanup', () => db.raw('TRUNCATE TABLE classification CASCADE'))
 
   describe('GET /family with valid type', () => {
     context(`Given no families`, () => {
